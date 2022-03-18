@@ -30,7 +30,7 @@ namespace WebEmploye.API.Controllers
             }
         }
 
-        [HttpGet("id:int")]
+        [HttpGet("{id}")]
         public async Task<ActionResult<Employee>> GetEmployees(int id)
         {
             try
@@ -71,7 +71,7 @@ namespace WebEmploye.API.Controllers
             }
         }
 
-        [HttpPut("id:int")]
+        [HttpPut("{id}")]
         public async Task<ActionResult<Employee>> UpdateEmployees(int id ,Employee employee)
         {
             try
@@ -95,7 +95,7 @@ namespace WebEmploye.API.Controllers
             }
         }
 
-        [HttpDelete("id:int")]
+        [HttpDelete("{id}")]
         public async Task<ActionResult<Employee>> deleteEmployees(int id)
         {
             try
