@@ -36,8 +36,7 @@ namespace WebEmploye.API.Services
 
         public async Task<Department> GetById(int id)
         {
-            return await _context.departments.Include(a=>a.EmployeeDepartment).ThenInclude(m=>m.Department)
-                .FirstOrDefaultAsync(x=>x.DepartmentId == id);
+            return await _context.departments.FirstOrDefaultAsync(x=>x.DepartmentId == id);
         }
 
         public async Task<IEnumerable<Department>> GetDepartments()
@@ -61,9 +60,7 @@ namespace WebEmploye.API.Services
             var result = await _context.departments.FirstOrDefaultAsync(x=>x.DepartmentId==department.DepartmentId);
             if (result != null)
             {
-                //result.DepartmentName = department.DepartmentName;
-                //result.DateBirth = department.DateBirth;
-                //result.Gender = department.Gender;
+                result.DepartmentName = department.DepartmentName;
                 await _context.SaveChangesAsync();
                 return result;
             }
