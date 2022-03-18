@@ -55,8 +55,16 @@ namespace WebEmploye.Web.Controllers
             return View();
         }
         [HttpPost]
-        public async Task<IActionResult> Create(Employee employee)
+        public async Task<IActionResult> Create(Employee E)
         {
+            HttpClient client = new HttpClient();
+            client.BaseAddress = new Uri("https://localhost:7185/");
+            HttpResponseMessage message = await client.GetAsync("api/employee",employee);
+            if (message.IsSuccessStatusCode)
+            {
+                return RedirectToAction("index");
+
+            }
             return View();
         }
         public IActionResult Privacy()
