@@ -1,5 +1,7 @@
 using Microsoft.EntityFrameworkCore;
-using WebEmp_DLL.Data;
+using WebEmploye.API.Data;
+using WebEmploye.API.Infrastructure;
+using WebEmploye.API.Services;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -7,6 +9,7 @@ var builder = WebApplication.CreateBuilder(args);
 var connectionString = builder.Configuration.GetConnectionString("DefaultConnection");
 builder.Services.AddDbContext<ApplicationDbContext>(options =>
     options.UseSqlServer(connectionString));
+builder.Services.AddTransient<IEmployeRepo, EmployeRepo>();
 builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
