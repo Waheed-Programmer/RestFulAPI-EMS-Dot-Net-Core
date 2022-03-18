@@ -1,10 +1,18 @@
-﻿using WebEmp_DLL.Entities;
+﻿using WebEmp_DLL.Data;
+using WebEmp_DLL.Entities;
 using WebEmploye.API.Infrastructure;
 
 namespace WebEmploye.API.Services
 {
     public class EmployeRepo : IEmployeRepo
     {
+        private readonly ApplicationDbContext _context;
+
+        public EmployeRepo(ApplicationDbContext context)
+        {
+            _context = context;
+        }
+
         public Task<Employee> AddEmployee(Employee employee)
         {
             throw new NotImplementedException();
