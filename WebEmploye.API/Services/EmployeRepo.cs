@@ -1,4 +1,5 @@
-﻿using WebEmp_DLL.Data;
+﻿using Microsoft.EntityFrameworkCore;
+using WebEmp_DLL.Data;
 using WebEmp_DLL.Entities;
 using WebEmploye.API.Infrastructure;
 
@@ -13,34 +14,60 @@ namespace WebEmploye.API.Services
             _context = context;
         }
 
-        public Task<Employee> AddEmployee(Employee employee)
+        public async Task<Employee> AddEmployee(Employee employee)
         {
-            throw new NotImplementedException();
+            var result = await _context.Employees.AddAsync(employee);
+            await _context.SaveChangesAsync();
+            return result.Entity;
         }
 
-        public Task<Employee> DeleteEmployee(int id)
+        public async Task<Employee> DeleteEmployee(int id)
         {
-            throw new NotImplementedException();
+
+            var result = await _context.Employees.FirstOrDefaultAsync(x => x.EmployeeId == id);
+            if (result != null)
+            {
+               _context.Employees.Remove(result);
+                await _context.SaveChangesAsync();
+                return result;
+            }
+            return null;
         }
 
-        public Task<Employee> GetById(int id)
+        public async Task<Employee> GetById(int id)
         {
-            throw new NotImplementedException();
+            return await _context.Employees.Include(a=>a.EmployeeDepartment).ThenInclude(m=>m.Department)
+                .FirstOrDefaultAsync(x=>x.EmployeeId == id);
         }
 
-        public Task<IEnumerable<Employee>> GetEmployees()
+        public async Task<IEnumerable<Employee>> GetEmployees()
         {
-            throw new NotImplementedException();
+            return await _context.Employees.ToListAsync();
         }
 
-        public Task<IEnumerable<Employee>> Search(string name)
+        public async Task<IEnumerable<Employee>> Search(string name)
         {
-            throw new NotImplementedException();
+            IQueryable<Employee> query = _context.Employees;
+            if (!string.IsNullOrEmpty(name))
+            {
+                query = query.Where(x => x.EmployeeName.Contains(name));
+            }
+
+            return await query.ToListAsync();
         }
 
-        public Task<Employee> UpdateEmployee(Employee employee)
+        public async Task<Employee> UpdateEmployee(Employee employee)
         {
-            throw new NotImplementedException();
-        }
+            var result = await _context.Employees.FirstOrDefaultAsync(x=>x.EmployeeId==employee.EmployeeId);
+            if (result != null)
+            {
+                result.EmployeeName = employee.EmployeeName;
+                result.DateBirth = employee.DateBirth;
+                result.Gender = employee.Gender;
+                await _context.SaveChangesAsync();
+                return result;
+            }
+            return null;
+        } 
     }
 }
