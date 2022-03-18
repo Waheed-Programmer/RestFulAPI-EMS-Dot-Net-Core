@@ -7,6 +7,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WebEmploye.Web", "WebEmploy
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WebEmp_DLL", "WebEmp_DLL\WebEmp_DLL.csproj", "{7DD83F9D-85A7-4C2D-9824-83B94677985D}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WebEmploye.API", "WebEmploye.API\WebEmploye.API.csproj", "{640442D0-8B8C-46F6-AF34-AF33571937C1}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,6 +23,10 @@ Global
 		{7DD83F9D-85A7-4C2D-9824-83B94677985D}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{7DD83F9D-85A7-4C2D-9824-83B94677985D}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{7DD83F9D-85A7-4C2D-9824-83B94677985D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{640442D0-8B8C-46F6-AF34-AF33571937C1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{640442D0-8B8C-46F6-AF34-AF33571937C1}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{640442D0-8B8C-46F6-AF34-AF33571937C1}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{640442D0-8B8C-46F6-AF34-AF33571937C1}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
