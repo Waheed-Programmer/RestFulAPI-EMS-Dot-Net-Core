@@ -71,7 +71,7 @@ namespace WebEmploye.API.Controllers
             }
         }
 
-        [HttpGet("id:int")]
+        [HttpPut("id:int")]
         public async Task<ActionResult<Employee>> UpdateEmployees(int id ,Employee employee)
         {
             try
@@ -94,5 +94,48 @@ namespace WebEmploye.API.Controllers
                     "Error Retrieving Data from Database");
             }
         }
+
+        [HttpDelete("id:int")]
+        public async Task<ActionResult<Employee>> deleteEmployees(int id)
+        {
+            try
+            {
+                
+                var result = await _employeRepo.GetById(id);
+                if (result == null)
+                {
+                    return NotFound($"Employe Id= {id} Not Found");
+                }
+                return await _employeRepo.DeleteEmployee(id);
+            }
+            catch (Exception)
+            {
+
+                return StatusCode(StatusCodes.Status500InternalServerError,
+                    "Error Retrieving Data from Database");
+            }
+        }
+
+        [HttpGet("{search}")]
+        public async Task<ActionResult <IEnumerable<Employee>>> search(string name)
+        {
+            try
+            {
+               
+                var result = await _employeRepo.Search(name);
+                if (result.Any())
+                {
+                    return Ok(result);
+                }
+                return NotFound();
+            }
+            catch (Exception)
+            {
+
+                return StatusCode(StatusCodes.Status500InternalServerError,
+                    "Error Retrieving Data from Database");
+            }
+        }
+
     }
 }
