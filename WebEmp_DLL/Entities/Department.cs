@@ -10,6 +10,8 @@ namespace WebEmp_DLL.Entities
     {
         public int DepartmentId { get; set; }
         public string DepartmentName { get; set; }
+        public ICollection<EmployeeDepartment> EmployeeDepartment { get; set; } = new HashSet<EmployeeDepartment>();
+
 
     }
 }

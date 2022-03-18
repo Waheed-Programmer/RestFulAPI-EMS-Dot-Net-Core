@@ -12,6 +12,7 @@ namespace WebEmp_DLL.Entities
         public string EmployeeName { get; set; }
         public Gender Gender { get; set; }
         public DateTime DateBirth  { get; set; }
+        public ICollection<EmployeeDepartment> EmployeeDepartment { get; set; } = new HashSet<EmployeeDepartment>();
     }
 
     public enum Gender 
