@@ -46,7 +46,7 @@ namespace WebEmploye.Web.Controllers
             Employee employe = new Employee();
             HttpClient client = new HttpClient();
             client.BaseAddress = new Uri("https://localhost:7185/");
-            HttpResponseMessage message = await client.GetAsync($"api/employee/id");
+            HttpResponseMessage message = await client.GetAsync($"api/employee/{id}");
             if (message.IsSuccessStatusCode)
             {
                 var result = message.Content.ReadAsStringAsync().Result;
@@ -80,7 +80,7 @@ namespace WebEmploye.Web.Controllers
         [HttpGet]
         public async Task<IActionResult> Update(int id)
         {
-            var employe = await GetEmployebyID(id);
+            Employee employe = await GetEmployebyID(id);
             return View(employe);
         }
 
