@@ -55,11 +55,11 @@ namespace WebEmploye.Web.Controllers
             return View();
         }
         [HttpPost]
-        public async Task<IActionResult> Create(Employee E)
+        public async Task<IActionResult> Create(Employee employee)
         {
             HttpClient client = new HttpClient();
             client.BaseAddress = new Uri("https://localhost:7185/");
-            HttpResponseMessage message = await client.PostAsync("api/employee",E);
+            HttpResponseMessage message = await client.GetAsync("api/employee");
             if (message.IsSuccessStatusCode)
             {
                 return RedirectToAction("index");
@@ -67,7 +67,7 @@ namespace WebEmploye.Web.Controllers
             }
             return View();
         }
-
+        [HttpDelete]
         public async Task<IActionResult> Delete()
         {
             Employee employe = new Employee();

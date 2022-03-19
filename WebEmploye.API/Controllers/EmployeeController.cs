@@ -55,7 +55,7 @@ namespace WebEmploye.API.Controllers
         {
             try
             {
-                //var result = await _employeRepo.GetById(id);
+                
                 if (employee == null)
                 {
                     return NotFound();
