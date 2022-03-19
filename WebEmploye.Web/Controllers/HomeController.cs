@@ -59,12 +59,27 @@ namespace WebEmploye.Web.Controllers
         {
             HttpClient client = new HttpClient();
             client.BaseAddress = new Uri("https://localhost:7185/");
-            HttpResponseMessage message = await client.GetAsync("api/employee",employee);
+            HttpResponseMessage message = await client.PostAsync("api/employee",E);
             if (message.IsSuccessStatusCode)
             {
                 return RedirectToAction("index");
 
             }
+            return View();
+        }
+
+        public async Task<IActionResult> Delete()
+        {
+            Employee employe = new Employee();
+            HttpClient client = new HttpClient();
+            client.BaseAddress = new Uri("https://localhost:7185/");
+            HttpResponseMessage message = await client.DeleteAsync($"api/employee/id");
+            if (message.IsSuccessStatusCode)
+            {
+                return RedirectToAction("index");
+
+            }
+
             return View();
         }
         public IActionResult Privacy()
