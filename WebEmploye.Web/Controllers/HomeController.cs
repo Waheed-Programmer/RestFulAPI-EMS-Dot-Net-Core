@@ -34,7 +34,14 @@ namespace WebEmploye.Web.Controllers
         }
 
 
-        public async Task<IActionResult> Details()
+        public async Task<IActionResult> Details(int id)
+        {
+            Employee employe = await GetEmployebyID(id);
+
+            return View(employe);
+        }
+
+        private static async Task<Employee> GetEmployebyID(int id)
         {
             Employee employe = new Employee();
             HttpClient client = new HttpClient();
@@ -47,8 +54,9 @@ namespace WebEmploye.Web.Controllers
 
             }
 
-            return View(employe);
+            return employe;
         }
+
         [HttpGet]
         public IActionResult Create()
         {
@@ -59,7 +67,7 @@ namespace WebEmploye.Web.Controllers
         {
             HttpClient client = new HttpClient();
             client.BaseAddress = new Uri("https://localhost:7185/");
-            HttpResponseMessage message = await client.GetAsync("api/employee");
+            HttpResponseMessage message = await client.PostAsJsonAsync("api/employee",employee);
             if (message.IsSuccessStatusCode)
             {
                 return RedirectToAction("index");
@@ -67,6 +75,34 @@ namespace WebEmploye.Web.Controllers
             }
             return View();
         }
+
+
+        [HttpGet]
+
+        public async Task<IActionResult> Update(int id)
+        {
+            var employe = await GetEmployebyID(id);
+            return View(employe);
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> Update(Employee employee)
+        {
+            HttpClient client = new HttpClient();
+            client.BaseAddress = new Uri("https://localhost:7185/");
+            HttpResponseMessage message = await client.PutAsJsonAsync($"api/employee/{employee.EmployeeId}", employee);
+            if (message.IsSuccessStatusCode)
+            {
+                return RedirectToAction("index");
+
+            }
+            return View();
+        }
+
+
+
+
+
         [HttpDelete]
         public async Task<IActionResult> Delete()
         {
