@@ -78,7 +78,6 @@ namespace WebEmploye.Web.Controllers
 
 
         [HttpGet]
-
         public async Task<IActionResult> Update(int id)
         {
             var employe = await GetEmployebyID(id);
@@ -103,7 +102,7 @@ namespace WebEmploye.Web.Controllers
 
 
 
-        [HttpDelete]
+     
         public async Task<IActionResult> Delete()
         {
             Employee employe = new Employee();
